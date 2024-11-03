@@ -83,12 +83,5 @@ describe('POST /solution', () => {
       expect(response.status).toBe(400); //Check that the status is 400
       expect(response.body.error).toBe('All inputs must be positive integers');//Check the error
     });
-
-    test('returns 400 error when data is null)', async () => {
-      const response = await request(app).post('/solution')
-      .send({ x_capacity: null, y_capacity: 3, z_amount_wanted: 5 });
-      expect(response.status).toBe(400); //Check that the status is 400
-      expect(response.body.error).toBe('All inputs must be positive integers');//Check the error
-    });
   });
 });

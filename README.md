@@ -183,3 +183,218 @@ To set up and run the REST API on a local machine, please ensure the following p
 
 * Node.js [Node.js](https://nodejs.org/en/)
 * For the project was used [Visual Studio Code](https://code.visualstudio.com/) as a development environment, but other options can be used.
+
+### Installation 🔧
+
+_We start by downloading the repository. To do this, open the console, go to the folder where you want to save the project and run the following command:_
+
+```
+git clone https://github.com/CarlosDev73/water-jug-challenge.git 
+```
+
+_Next, the necessary project dependencies must be installed using the following command.:_
+
+```
+npm install
+```
+
+_Once the dependencies have been installed, the project is ready to be deployed._
+
+## Deployment 📦 
+
+* To perform a local deployment (localhost:3000) of the project, execute one of the following commands:_
+
+```
+npm start
+```
+
+It is important to note that to test the API endpoint, an API testing tool such as Postman or Thunder Client is needed. These tools allow you to send requests to the API and effectively review the responses.
+
+## Test Cases 📝
+
+Below is a series of test cases that can be applied to evaluate the performance of the API. It is important to note that the solution.test.js file contains both unit and integration tests (using jest and supertest) to verify the correct functioning of the project's functions. Run the tests with the following command
+
+```
+npm test
+```
+
+### Positive Cases ✔️
+
+#### 1. First Positive Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":2,
+  "y_capacity":10,
+  "z_amount_wanted":4
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "solution": [
+    {
+      "step": 1,
+      "bucketX": 2,
+      "bucketY": 0,
+      "action": "Fill bucket X"
+    },
+    {
+      "step": 2,
+      "bucketX": 0,
+      "bucketY": 2,
+      "action": "Transfer from bucket X to Y"
+    },
+    {
+      "step": 3,
+      "bucketX": 2,
+      "bucketY": 2,
+      "action": "Fill bucket X"
+    },
+    {
+      "step": 4,
+      "bucketX": 0,
+      "bucketY": 4,
+      "action": "Transfer from bucket X to Y",
+      "status": "Solved"
+    }
+  ]
+}
+```
+
+#### 2. Second Positive Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":2,
+  "y_capacity":100,
+  "z_amount_wanted":96
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "solution": [
+    {
+      "step": 1,
+      "bucketX": 0,
+      "bucketY": 100,
+      "action": "Fill bucket Y"
+    },
+    {
+      "step": 2,
+      "bucketX": 2,
+      "bucketY": 98,
+      "action": "Transfer from bucket Y to X"
+    },
+    {
+      "step": 3,
+      "bucketX": 0,
+      "bucketY": 98,
+      "action": "Empty bucket X"
+    },
+    {
+      "step": 4,
+      "bucketX": 2,
+      "bucketY": 96,
+      "action": "Transfer from bucket Y to X",
+      "status": "Solved"
+    }
+  ]
+}
+```
+
+### Negative Cases ✖️
+
+#### 1. First Negative Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":2,
+  "y_capacity":6,
+  "z_amount_wanted":5
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "solution": "No solution possible"
+}
+```
+
+#### 2. Second Negative Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":2,
+  "y_capacity":3,
+  "z_amount_wanted":5
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "solution": "No solution possible"
+}
+```
+
+#### 3. Third Negative Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":-1,
+  "y_capacity":2,
+  "z_amount_wanted":5
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "error": "All inputs must be positive integers"
+}
+```
+
+#### 4. Fourth Negative Case
+
+Payload JSON: POST
+
+```json
+{ 
+  "x_capacity":2,
+  "y_capacity":"I am string",
+  "z_amount_wanted":5
+} 
+```
+
+The result obtained by the endpoint would be:
+
+```json
+{
+  "error": "All inputs must be positive integers"
+}
+```
+
+---
+## Author ✒️
+
+**Carlos Gutierrez** - [CarlosDev73](https://github.com/CarlosDev73)
